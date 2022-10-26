@@ -9,15 +9,19 @@ import BootstrapVue3 from 'bootstrap-vue-3'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
-import mitt from 'mitt';
+
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import Toasted from 'vue-toasted';
+// import Toasted from 'vue-toasted';
+import VueToast from 'vue-toast-notification';
+// Import one of the available themes
+//import 'vue-toast-notification/dist/theme-default.css';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
 
 // Vue.use(BootstrapVue3)
 // Vue.use(BootstrapVueIcons)
-const emitter = mitt();
+// const emitter = mitt();
 
 
 
@@ -27,10 +31,12 @@ const app = createApp({
     }
 })
 
-app.config.globalProperties.emitter = emitter;
+// app.config.globalProperties.emitter = emitter;
 app.use(BootstrapVue3)
     .use(VueSweetalert2)
-    // .use(Toasted)
+    // .use(VueToast, {
+    //     position: 'bottom-right'
+    // })
     .mount('#app');
 // app.use(BootstrapVue3)
 

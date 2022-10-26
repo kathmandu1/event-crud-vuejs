@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\EventFilterFacade;
 use App\Helpers\FilterEvent;
+use App\Http\Requests\EventStoreRequest;
 use App\Http\Resources\EventResource;
 use App\Services\Contracts\EventContract;
 use Carbon\Carbon;
@@ -34,10 +35,10 @@ class EventController extends Controller
         return EventResource::collection($events);
     }
 
-    public function store(Request $request)
+    public function store(EventStoreRequest $request)
     {
         try{
-            
+
             $customeRequestItems = new Request([
                 'title' => $request->title,
                 'description' => $request->description,
