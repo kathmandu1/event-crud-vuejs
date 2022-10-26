@@ -69,24 +69,27 @@
                         <td></td>
                         <td>
                             <input class="form-control" type="text" v-model="inputs.title" />
-                            <div v-if="allErrors && allErrors[k+'.fiscal_year_name']" class="text-danger">
-                                  {{ allErrors[k+'.fiscal_year_name'][0] }}
+                            <div v-if="allErrors && allErrors['title']" class="text-danger">
+                                  {{ allErrors['title'][0] }}
                             </div>
                         </td>
                         <td>
                           <input class="form-control" type="text" v-model="inputs.description" />
-                          <div v-if="allErrors && allErrors[k+'.description']" class="text-danger">
-                                {{ allErrors[k+'.descriptions'][0] }}
+                          <div v-if="allErrors && allErrors['description']" class="text-danger">
+                                {{ allErrors['description'][0] }}
                           </div>
                       </td>
                         <td>
                             <Datepicker v-model="inputs.start_date" />
-                            <div v-if="allErrors && allErrors[k+'.fiscal_year_start']" class="text-danger">
-                                  {{ allErrors[k+'.fiscal_year_start'][0] }}
+                            <div v-if="allErrors && allErrors['start_date']" class="text-danger">
+                                  {{ allErrors['start_date'][0]}}
                             </div>
                         </td>
                         <td>
                           <Datepicker v-model="inputs.end_date" />
+                          <div v-if="allErrors && allErrors['end_date']" class="text-danger">
+                            {{ allErrors['end_date'][0] }}
+                      </div>
                         </td>
                         <td>
                         </td>
@@ -129,6 +132,7 @@ export default {
     },
     data() {
       return {
+        allErrors : null ,
         isEmpty: false,
         isLoading: true,
         fields: ["title", "description", "start_date", "end_date"],
@@ -173,7 +177,6 @@ export default {
         }
         this.isLoading = true;
          axios.all([
-              //  axios.post('/api/filterledgure', this.inputs,config),
             axios.get(EventList, {
                     params : filterType
                     
@@ -194,14 +197,9 @@ export default {
                 .post(storeEvent, this.inputs)
                 .then(response => {
                     this.inputs.splice(0,this.inputs.length)
-                     this.$toasted.show('Successfully Added Event',{
-                        type : 'success',
-                        theme: "outline",
-                        duration : 5000
-                    });
                 })
                 .catch(error => {
-                    console.log(error.response.status);
+                    console.log('error is', error.response.status);
                     if (error.response.status == 422){
                         this.allErrors = error.response.data.errors
                     }
@@ -249,11 +247,6 @@ export default {
             axios
             .delete(deleteEvent+event_id)
             .then(response => {
-                 this.$toasted.show('Successfully Delete a item from record',{
-                        type : 'success',
-                        theme: "outline",
-                        duration : 5000
-                });
             })
             .catch(error => {
                 console.log(error)
