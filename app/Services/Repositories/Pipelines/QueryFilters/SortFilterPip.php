@@ -4,14 +4,14 @@ namespace App\Services\Repositories\Pipelines\QueryFilters ;
 
 use Closure;
 
-class FindOrFailPipe
+class SortFilterPip
 {
     public function handle($request, Closure $next)
     {
-        if (!request()->has('id')) {
+        if (!request()->has('sort')) {
             return $next($request);
         }
-        return $next($request)->findOrFail( request()->id );
+        return $next($request)->orderBy( request()->sortcolumn, request()->sort );
 
     }
 }

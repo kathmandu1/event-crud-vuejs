@@ -16,8 +16,8 @@ class EventFactory extends Factory
         return [
             'title' => $this->faker->name(),
             'description' => $this->faker->address(),
-            'start_date' => $this->faker->dateTime(),
-            'end_date' => $this->faker->dateTime(),
+            'start_date' => $this->faker->unique()->dateTimeBetween('-2 week', '+3 week'),
+            'end_date' => $this->faker->unique()->dateTimeBetween('-2 week', '+3 week'),
         ];
     }
 }
