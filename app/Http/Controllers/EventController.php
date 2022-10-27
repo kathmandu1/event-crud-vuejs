@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Facades\EventFilterFacade;
 use App\Helpers\FilterEvent;
 use App\Http\Requests\EventStoreRequest;
+use App\Http\Requests\EventUpdateRequest;
 use App\Http\Resources\EventResource;
 use App\Models\Event;
 use App\Services\Contracts\EventContract;
@@ -65,22 +66,25 @@ class EventController extends Controller
                 'end_date' => $this->carbon->parse($request->end_date) ,
             ]);
             $events = $this->eventContract->storeEvent($customeRequestItems) ;
-            dd($events);
         }catch(Exception $e)
         {
             DB::rollBack();
             return response(['error' => $e->getMessage()], 500);
         }
         DB::commit();
-        return new EventResource($events);
+        return (new EventResource($events))
+                ->response()
+                ->setStatusCode(201);
     }
 
     /**
      * this memeber function  update event tostorage
-     * @param Request  for update attributes
-     * @return Response in 201 status 
+     * @param EventUpdateRequest  for update attributes and validation logic
+     * @return Response in 204 status 
+     * seperation of concern  as per single responsibility principle
+     * we make seperate form request validation rule for updare
      */
-    public function update(Request $request, int $id)
+    public function update(EventUpdateRequest $request, int $id)
     {
         try{
             DB::beginTransaction();
@@ -98,7 +102,8 @@ class EventController extends Controller
             return response(['error' => $e->getMessage()], 500);
         }
         DB::commit();
-        return new EventResource($eventUpdate);
+        return response(['message' => 'successfully update a event'])
+                ->setStatusCode(204);
     }
 
     /**

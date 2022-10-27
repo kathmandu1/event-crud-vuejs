@@ -57,7 +57,7 @@ class EventService implements EventContract
         return $event ;
     }
 
-    public function updateOrCreate($request, $id = null)
+    public function updateOrCreate($request, $id)
     {
         $event  =  $this->event->updateOrCreate([
             'id' => $id
