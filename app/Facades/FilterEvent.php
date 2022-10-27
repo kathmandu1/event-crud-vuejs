@@ -19,7 +19,7 @@ class FilterEvent
      * @params $filterType => what type of date
      * @return Array 
      */
-    public function findDayDiff($filterType )
+    public function findDayDiff( String $filterType ) : Array
     {
         $carbon = new Carbon();
         $dateFrom = null ;
