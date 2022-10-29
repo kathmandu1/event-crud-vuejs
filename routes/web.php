@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 Route::get('/events', function () {
     return view('event');
-});
+})->name('event.page');
