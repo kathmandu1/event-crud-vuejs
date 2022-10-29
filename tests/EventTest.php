@@ -18,30 +18,30 @@ class EventTest extends TestCase
      *
      * @return void
      */
-    // public function test_get_event_list()
-    // {
-    //     $event = $this->createMock(EventContract::class);
-    //     $carbon = $this->createMock(Carbon::class);
-    //     $some_controller = new EventController($event , $carbon);
-    //     $request =  $this->createMock(Request::class, function ($mock) {
-    //         $mock->shouldReceive('passes')->andReturn(true);
-    //     });
+    public function test_get_event_list()
+    {
+        $event = $this->createMock(EventContract::class);
+        $carbon = $this->createMock(Carbon::class);
+        $some_controller = new EventController($event , $carbon);
+        $request =  $this->createMock(Request::class, function ($mock) {
+            $mock->shouldReceive('passes')->andReturn(true);
+        });
 
-    //     $event = $some_controller->index($request);
-    //     $this->assertTrue(true);
-    // }
+        $event = $some_controller->index($request);
+        $this->assertTrue(true);
+    }
 
-    // public function test_store_event()
-    // {
-    //     $event = $this->createMock(EventContract::class);
-    //     $carbon = $this->createMock(Carbon::class);
-    //     $some_controller = new EventController($event , $carbon);
-    //     // $request =  $this->createMock(EventStoreRequest::class, function ($mock) {
-    //     //     $mock->shouldReceive('passes')->andReturn(true);
-    //     // });
-    //     $request =  $this->createMock(EventStoreRequest::class);
+    public function test_store_event()
+    {
+        $event = $this->createMock(EventContract::class);
+        $carbon = $this->createMock(Carbon::class);
+        $some_controller = new EventController($event , $carbon);
+        // $request =  $this->createMock(EventStoreRequest::class, function ($mock) {
+        //     $mock->shouldReceive('passes')->andReturn(true);
+        // });
+        $request =  $this->createMock(EventStoreRequest::class);
 
-    //     $event = $some_controller->store($request);
-    //     $this->assertTrue(true);
-    // }
+        $event = $some_controller->store($request);
+        $this->assertTrue(true);
+    }
 }
