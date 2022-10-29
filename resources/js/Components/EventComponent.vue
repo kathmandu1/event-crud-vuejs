@@ -5,20 +5,33 @@
         <div class="col-sm-9 card">
             <div class="card-header ">
                 <h4 class="mt-0 header-title">Events</h4>
-                <div class="float-right">
-                  <a href="#" class="btn btn-sm btn-success " @click="saveRows"> Save Rows </a> &nbsp;
+                <!-- <div class="float-right"> -->
+                  <!-- <a href="#" class="btn btn-sm btn-success " @click="saveRows"> Save Rows </a> &nbsp; -->
                   <!-- <a href="#" class="btn btn-sm btn-info pull-right" @click="addRows"> Add Row </a> &nbsp; -->
-                </div>
+                <!-- </div> -->
 
                 <div class="row">
-                  <form class="form-inline">
-                      Filter Events <select class="form-control form-inline" style="width: 240px;" v-model="filterItems.event"   required >
+                  <div class="col-sm-6">
+                    <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Filter Event Options</span>
+                      <select class="form-control form-inline" style="width: 240px;" v-model="filterItems.event"   required >
+                            <option selected>Filter Event </option>
+                            <option v-for="(filter, index ) in filterItems" v-bind:key="index" :value="filter.event">{{ filter.event }}</option>
+                        </select>   
+                      </div>
+
+                  </div>
+                  <div class="col-sm-4">
+                  <!-- <form class="">
+                      Filter Events 
+                      <select class="form-control form-inline" style="width: 240px;" v-model="filterItems.event"   required >
                           <option selected>Filter Event </option>
                           <option v-for="(filter, index ) in filterItems" v-bind:key="index" :value="filter.event">{{ filter.event }}</option>
-                      </select>
+                      </select> -->
                       
                       <button class="btn btn-info" @click="getEventList"> <i class="fa fa-search"  > </i> Filter Event</button>
-                  </form>
+                  <!-- </form> -->
+                  </div>
                   
                 </div>
             </div>
@@ -92,6 +105,7 @@
                       </div>
                         </td>
                         <td>
+                          <a href="#" class="btn btn-sm btn-success " @click="saveRows"> Save  </a> &nbsp;
                         </td>
                       </tr>
 
@@ -121,8 +135,8 @@ import { deleteEvent } from "../Api";
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 const config = {
-    headers: {
-                Accept : 'application/json',
+  headers: {
+              Accept : 'application/json',
             }
 };
 export default {
@@ -163,7 +177,6 @@ export default {
  
         }
       // ]
-  
       };
     },
     created() {
@@ -196,7 +209,8 @@ export default {
               axios
                 .post(storeEvent, this.inputs)
                 .then(response => {
-                    this.inputs.splice(0,this.inputs.length)
+                    // this.inputs.splice(0,this.inputs.length)
+                  this.inputs = [] ;
                 })
                 .catch(error => {
                     console.log('error is', error.response.status);
@@ -214,20 +228,22 @@ export default {
                 .finally(
                     () =>
                     this.getEventList()
+                    
                     // this.loading = false
                 )
         },
-
+        clearInputField(){
+          
+        },
         addRows ()
         {
-            this.show_input = true,
-            this.inputs.push({
-                fiscal_year_name : '',
-                fiscal_year_name_np : '',
-                current_active : false,
-                fiscal_year_start : '',
-                fiscal_year_end : null ,
-            });
+          this.show_input = true,
+          this.inputs.push({
+          description : '',
+          title : '',
+          start_date : false,
+          end_date : '',
+          });
         },
 
         removeInput (index, obj) {
@@ -252,7 +268,7 @@ export default {
                 console.log(error)
             })
             .finally(() => this.loading = false)
-            this.fiscalyears.splice(index, 1);
+            this.items.splice(index, 1);
         },
         alertDisplay(index, event_id) {
         this.$swal({
