@@ -27,9 +27,9 @@ class EventTest extends TestCase
                             'title',
                             'description',
                             'start_date',
-                            'end_date',     
+                            'end_date',
                         ],
-                    
+
                     ]
                 ]
             );
@@ -55,17 +55,17 @@ class EventTest extends TestCase
                         'title',
                         'description',
                         'start_date',
-                        'end_date',     
-                    ],     
+                        'end_date',
+                    ],
                 ]
             );
     }
     /**
-     * test for api data update to database 
+     * test for api data update to database
      */
     public function test_event_update_to_database()
     {
-        $event = Event::factory()->create();   
+        $event = Event::factory()->create();
         $updatePayload =   [
             'title' => 'title from test case',
             'description' => 'description from test case',
@@ -95,7 +95,7 @@ class EventTest extends TestCase
         $event = Event::factory()->create([
             'start_date' => Carbon::now()->subDay(6),
             'end_date' => Carbon::now()->subDay(3)
-        ]);  
+        ]);
 
         $payload = [
             'date' => 'Last Week',
@@ -110,9 +110,9 @@ class EventTest extends TestCase
                             'title',
                             'description',
                             'start_date',
-                            'end_date',     
+                            'end_date',
                         ],
-                    
+
                     ]
                 ]
             );
@@ -126,7 +126,7 @@ class EventTest extends TestCase
         $event = Event::factory()->create([
             'start_date' => Carbon::now()->subDay(10),
             'end_date' => Carbon::now()->subDay(6)
-        ]);  
+        ]);
 
         $payload = [
             'date' => 'Finished',
@@ -141,9 +141,9 @@ class EventTest extends TestCase
                             'title',
                             'description',
                             'start_date',
-                            'end_date',     
+                            'end_date',
                         ],
-                    
+
                     ]
                 ]
             );
@@ -157,7 +157,7 @@ class EventTest extends TestCase
         $event = Event::factory()->create([
             'start_date' => Carbon::now()->addDay(2),
             'end_date' => Carbon::now()->addDay(6)
-        ]);  
+        ]);
 
         $payload = [
             'date' => 'Comming',
@@ -172,9 +172,9 @@ class EventTest extends TestCase
                             'title',
                             'description',
                             'start_date',
-                            'end_date',     
+                            'end_date',
                         ],
-                    
+
                     ]
                 ]
             );
@@ -188,7 +188,7 @@ class EventTest extends TestCase
         $event = Event::factory()->create([
             'start_date' => Carbon::now()->addDay(2),
             'end_date' => Carbon::now()->addDay(6)
-        ]);  
+        ]);
 
         $payload = [
             'date' => 'Comming',
@@ -203,9 +203,9 @@ class EventTest extends TestCase
                             'title',
                             'description',
                             'start_date',
-                            'end_date',     
+                            'end_date',
                         ],
-                    
+
                     ]
                 ]
             );

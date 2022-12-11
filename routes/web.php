@@ -18,6 +18,18 @@ Route::get('/', function () {
 });
 
 
-Route::get('/events', function () {
-    return view('event');
-})->name('event.page');
+Route::middleware(['authcheck'])->group(function () {
+    Route::get('/events', function () {
+        return view('event');
+    })->name('event.page');
+});
+
+//Route::get('/login', function () {
+//    return view('login');
+//})->name('login');
+
+Route::controller(\App\Http\Controllers\LoginController::class)->group(function () {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'authenticate')->name('post-login');
+});
+
