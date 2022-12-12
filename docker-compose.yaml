@@ -4,7 +4,8 @@ services:
     container_name: app
     build:
       context: .
-      dockerfile: ./Dockerfile
+#      dockerfile: ./Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     expose:
       - 9000
     volumes:

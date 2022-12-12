@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.0-fpm
 
 # Install dockerize so we can wait for containers to be ready
 ENV DOCKERIZE_VERSION 0.6.1
@@ -17,6 +17,24 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+        libz-dev \
+        libpq-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libssl-dev \
+        libzip-dev \
+        unzip \
+        zip \
+        nodejs \
+    && apt-get clean \
+    && pecl install redis \
+    && docker-php-ext-configure gd \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install \
+        gd \
+        exif \
+        opcache \
+        pdo_mysql \
         pdo_pgsql \
         pgsql \
         pcntl \
