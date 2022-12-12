@@ -35,7 +35,7 @@ class LoginRequstTest extends TestCase
         $this->assertEquals([
             'email' => 'required|email',
             'password' => 'required',
-            'g-recaptcha-response' => 'required|recaptchav3:register,0.5'
+//            'g-recaptcha-response' => 'required|recaptchav3:register,0.5'
         ], $request->rules());
     }
 }

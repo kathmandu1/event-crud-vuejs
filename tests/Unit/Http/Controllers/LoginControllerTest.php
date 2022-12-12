@@ -6,7 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Models\User;
 use Tests\TestCase;
 
-class EventControllerTest extends TestCase
+class LoginControllerTest extends TestCase
 {
 
     /**
@@ -14,12 +14,12 @@ class EventControllerTest extends TestCase
      */
     public  function  test_login_redirect_to_login_page() : void
     {
-
         $login = new LoginController();
         $user  = User::factory()->create();
         $this->actingAs($user);
         $response = $login->login();
-        $response->assetEqual('login', $response->getName());
+//        dd($response->getName());
+        $this->assertEquals('login', $response->getName());
     }
 
 
